@@ -1,0 +1,3 @@
+---
+# vars file for setup_k8s
+helm_chart_url: "https://charts.bitnami.com/bitnami"

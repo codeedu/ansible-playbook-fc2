@@ -1,0 +1,3 @@
+---
+- include: setup-k8s.yaml
+# tasks file for setup_k8s

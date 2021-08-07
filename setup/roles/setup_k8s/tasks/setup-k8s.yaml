@@ -1,0 +1,38 @@
+---
+- name: Add an Apt Google K8S Key
+  ansible.builtin.apt_key:
+    url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+    state: present
+
+- name: Add K8S repository
+  ansible.builtin.apt_repository:
+    repo: deb https://apt.kubernetes.io/ kubernetes-xenial main
+    state: present    
+
+- name: Add helm key
+  ansible.builtin.apt_key:
+    url: https://baltocdn.com/helm/signing.asc
+    state: present    
+
+- name: Add Helm repository
+  ansible.builtin.apt_repository:
+    repo: deb https://baltocdn.com/helm/stable/debian/ all main
+    state: present   
+
+- name: Install Kubectl
+  apt:
+    pkg: 
+    - kubectl
+    - helm
+    - python3-pip
+    update_cache: yes
+    state: present
+
+- name: install openshift
+  pip:
+    name: openshift
+
+- name: Add helm bitnami repository
+  kubernetes.core.helm_repository:
+    name: stable
+    repo_url: "{{ helm_chart_url }}"
