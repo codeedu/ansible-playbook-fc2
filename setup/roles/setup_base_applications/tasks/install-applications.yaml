@@ -1,0 +1,17 @@
+---
+- name: Install Postgres Chart
+  kubernetes.core.helm:
+    name: postgres
+    chart_ref: stable/postgresql
+    namespace: postgres
+    create_namespace: true
+    values: "{{ lookup('template', 'postgres-helm.j2') | from_yaml }}"
+
+- name: Install RabbitMQ Chart
+  kubernetes.core.helm:
+    name: rabbitmq
+    chart_ref: stable/rabbitmq
+    namespace: rabbitmq
+    create_namespace: true
+
+

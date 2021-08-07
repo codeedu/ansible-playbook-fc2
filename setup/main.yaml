@@ -1,4 +1,5 @@
 - hosts: local
+  become: yes
   roles:
-  - role: setup_k8s
-  - role: rabbitmq_operator
+  # - { role: setup_k8s, tags: ["setup_k8s"] }
+  - { role: setup_base_applications, tags: ["setup_base_applications"] }
